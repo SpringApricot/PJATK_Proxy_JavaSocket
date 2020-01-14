@@ -44,24 +44,7 @@ public class ProxyServer {
 		
 		public void run() {
 			try {
-				BufferedReader browserIn = new BufferedReader(new InputStreamReader((browserSocket.getInputStream())));
-	            PrintWriter browserOut = new PrintWriter(browserSocket.getOutputStream());
-	            
-	            HTTPRequest currentRequest = new HTTPRequest(browserIn);
-	            System.out.println("> Incoming request:" + currentRequest);
-	            
-	            if(currentRequest.method.equals("GET")) {
-	            	HTTPResponse response = currentRequest.forward();
-	            	System.out.println("> Sendign response: " + response.getHeader());
-	            	System.out.println(">> Response headers: ");
-	            	response.printHeaders("  >> ");
-	            	System.out.println("    >> Response body:\n      " + response.getBody());
-	            	response.send(browserOut);
-	            }
-	            
-	            browserIn.close();
-            	browserOut.close();
-				browserSocket.close();
+				//TODO
 			} catch (Exception e) {
 				//TODO
 				System.out.println(e);
