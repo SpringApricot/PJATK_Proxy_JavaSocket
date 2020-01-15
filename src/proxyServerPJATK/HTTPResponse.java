@@ -1,6 +1,7 @@
 package proxyServerPJATK;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,48 +18,26 @@ public class HTTPResponse {
 	String body;
 	byte[] imageBody;
 	
+	byte[] byteBuffer;
+	
 	public HTTPResponse (BufferedReader input, InputStream stream) throws IOException {
-		String line;
-		while (!(line = input.readLine()).equals("")) {
-			unparsedRequest.add(line);
-		}
-		unparsedRequest.add("");
+		byteBuffer = new byte[16384];
+		int n;
 		
-		parse();
+		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		
-		if(headers.containsKey("Content-Type") && headers.get("Content-Type").matches("text.*")) {
-			//Reading text body
-			body = new String();
-			while (((line = input.readLine()) != null)) {
-				System.out.println( "_O_O_O_O_O_O_O_O_O_O_O     " + line);
-				body = body.concat(line + "\r\n");
-			}
-		} else if (headers.containsKey("Content-Type") && headers.get("Content-Type").matches("image.*")) {
-			//Reading image body
-			System.out.println("!!!!!!READING IMAGE!!!!!!!");
-			int contentLength = Integer.parseInt(headers.get("Content-Length"));
-			imageBody = new byte[contentLength];
-			stream.read(imageBody, 0, contentLength);
-			System.out.println(imageBody);
+		while ((n = stream.read(byteBuffer, 0, byteBuffer.length)) != -1) {
+			byteStream.write(byteBuffer, 0, n);
 		}
-		/*
-		if (headers.containsKey("Content-Length")) {
-			try {
-				int contentLength = Integer.parseInt(headers.get("Content-Length"));
-				/*if (headers.get("Content-Encoding").equals("gzip")) {
-					decodeBody(contentLength, stream);
-				} else {*\/
-					char[] buffer = new char[contentLength];
-					input.read(buffer, 0, contentLength);
-					body = new String(buffer);
-					body = body.trim();
-				//}
-				unparsedRequest.add(body);
-			} catch (Exception e) {
-				System.out.println(e);
-				e.printStackTrace();
-			}
-		}*/
+		
+		byte[] byteData = byteStream.toByteArray();
+		
+		String fullData = byteData.toString();
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                 " + byteData);
+		
+		
+		
 	}
 	
 	public void parse() {
