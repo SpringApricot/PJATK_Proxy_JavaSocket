@@ -1,9 +1,9 @@
 package proxyServerPJATK;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -45,7 +45,8 @@ public class ProxyServer {
 		public void run() {
 			try {
 				BufferedReader browserIn = new BufferedReader(new InputStreamReader((browserSocket.getInputStream())));
-	            PrintWriter browserOut = new PrintWriter(browserSocket.getOutputStream());
+				OutputStream browserOutStream = browserSocket.getOutputStream();
+	            PrintWriter browserOut = new PrintWriter(browserOutStream);
 	            
 	            HTTPRequest currentRequest = new HTTPRequest(browserIn);
 	            System.out.println("> Incoming request:" + currentRequest);
@@ -56,7 +57,7 @@ public class ProxyServer {
 	            	System.out.println(">> Response headers: ");
 	            	response.printHeaders("  >> ");
 	            	System.out.println("    >> Response body:\n      " + response.getBody());
-	            	response.send(browserOut);
+	            	response.send(browserOut, browserOutStream);
 	            }
 	            
 	            browserIn.close();
