@@ -1,7 +1,6 @@
 package proxyServerPJATK;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -50,6 +49,7 @@ public class HTTPRequest {
 		}
 		
 		headers.put("Accept-Encoding", "identity");
+		headers.put("Connection", "close");
 	}
 	
 	public HTTPResponse forward() throws UnknownHostException, IOException {
