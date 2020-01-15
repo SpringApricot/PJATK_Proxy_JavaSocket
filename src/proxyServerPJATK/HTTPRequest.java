@@ -54,21 +54,22 @@ public class HTTPRequest {
 	
 	public HTTPResponse forward() throws UnknownHostException, IOException {
 		Socket targetSocket = new Socket(headers.get("Host"), 80);
-		InputStream targetInStream = targetSocket.getInputStream();
-		BufferedReader targetIn = new BufferedReader(new InputStreamReader((targetInStream)));
+		BufferedReader targetIn = new BufferedReader(new InputStreamReader((targetSocket.getInputStream())));
         PrintWriter targetOut = new PrintWriter(targetSocket.getOutputStream());
         
-        //Send data to targetOut here.
+        //Send data to targetOut here, create a response object to read in and store the target server's response.
         send(targetOut);
-        HTTPResponse response = new HTTPResponse(targetIn, targetInStream);
+        HTTPResponse response = new HTTPResponse(targetIn);
         
         targetOut.close();
 		targetIn.close();
 		targetSocket.close();
         
+		//Returning the response object that can send the server's response.
         return response;
 	}
 	
+	//Parsing the request and headers for ease of access.
 	public void parse() {
 		//Saving the data stored in the request line to the object.
 		String[] topLineSplit = unparsedRequest.get(0).split(" ");
@@ -84,6 +85,7 @@ public class HTTPRequest {
 		}
 	}
 	
+	//Sending the request to the target server via the provided writer.
 	public void send(PrintWriter writer) throws IOException {
 		writer.println(method + " " + address + " " + version);
 		writer.flush();
@@ -100,55 +102,5 @@ public class HTTPRequest {
 			writer.println(body);
 			writer.flush();
 		}
-	}
-	
-	//=====================DEBUG=====================
-	
-	public void sendUnparsed(PrintWriter writer) throws IOException {
-		for (int i = 0; i < unparsedRequest.size(); i++) {
-			String unparsedLine = unparsedRequest.get(i);
-			if(unparsedLine.equals("Accept-Encoding: gzip, deflate")) {
-				unparsedRequest.remove(i);
-				unparsedRequest.add(i, "Accept-Encoding: identity");
-			}
-		}
-		
-		for (String entry : unparsedRequest) {
-			writer.println(entry);
-			writer.flush();
-		}
-	}
-	
-	public String toString() {
-		StringBuilder result = new StringBuilder(method);
-		
-		result.append(" ");
-		result.append(address);
-		result.append(" ");
-		result.append(version);
-		
-		headers.forEach((k, v) -> {
-			result.append(System.lineSeparator());
-			result.append(k);
-			result.append(": ");
-			result.append(v);
-		});
-		
-		result.append(System.lineSeparator());
-		
-		if (body != null) {
-			result.append(System.lineSeparator());
-			result.append(body);
-		}
-		
-		return result.toString();
-	}
-	
-	public void printHeader() {
-		System.out.println(unparsedRequest.get(0));
-	}
-	
-	public String getHeader() {
-		return unparsedRequest.get(0);
 	}
 }

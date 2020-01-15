@@ -28,6 +28,7 @@ public class ProxyServer {
 	
 	public void start() throws IOException {
         serverSocket = new ServerSocket(port);
+        //Listening for incoming requests.
         while (true) {
         	new ProxyThread(serverSocket.accept()).start();
         }
@@ -45,19 +46,14 @@ public class ProxyServer {
 		public void run() {
 			try {
 				BufferedReader browserIn = new BufferedReader(new InputStreamReader((browserSocket.getInputStream())));
-				OutputStream browserOutStream = browserSocket.getOutputStream();
-	            PrintWriter browserOut = new PrintWriter(browserOutStream);
+	            PrintWriter browserOut = new PrintWriter(browserSocket.getOutputStream());
 	            
 	            HTTPRequest currentRequest = new HTTPRequest(browserIn);
-	            System.out.println("> Incoming request:" + currentRequest);
 	            
+	            //Only supporting HTTP, not HTTPS
 	            if(currentRequest.method.equals("GET")) {
 	            	HTTPResponse response = currentRequest.forward();
-	            	System.out.println("> Sendign response: " + response.getHeader());
-	            	System.out.println(">> Response headers: ");
-	            	response.printHeaders("  >> ");
-	            	System.out.println("    >> Response body:\n      " + response.getBody());
-	            	response.send(browserOut, browserOutStream);
+	            	response.send(browserOut);
 	            }
 	            
 	            browserIn.close();
