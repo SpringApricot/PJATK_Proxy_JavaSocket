@@ -1,32 +1,62 @@
 package proxyServerPJATK;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class ProxyServer {
 	ServerSocket serverSocket;
 	int port;
+	List<String> words = new ArrayList<String>();
+	String cachePath;
 	
 	//TODO:
 	//Deal with exceptions nicely.
 	
-	//Static methods
+	//==Static methods==
 	public static void main(String[] args) throws IOException {
-		ProxyServer server = new ProxyServer(5555);
+		System.out.println("Settings file: " + args[0]);
+		ProxyServer server = new ProxyServer(args[0]);
         server.start();
     }
 	
-	//Dynamic methods
-	public ProxyServer(int port) {
-		this.port = port;
+	//==Dynamic methods==
+	//Constructor
+	private ProxyServer(String settingsPath) throws IOException {
+		readSettings(settingsPath);
 	}
 	
-	public void start() throws IOException {
+	//Read in the settings from the settings file.
+		private void readSettings(String path) throws IOException {
+			HashMap<String, String> rawSettings = new HashMap<String, String>();
+			File settingsFile = new File(path);
+			BufferedReader reader = new BufferedReader(new FileReader(settingsFile));
+			
+			//Reading settings from the file in a raw form.
+			String line;
+			String[] lineSplit;
+			while((line = reader.readLine()) != null) {
+				lineSplit = line.split("=");
+				rawSettings.put(lineSplit[0], lineSplit[1]);
+			}
+			
+			//Saving the raw settings to appropriate variables.
+			port = Integer.parseInt(rawSettings.get("PROXY_PORT"));
+			cachePath = rawSettings.get("CACHE_DIR");
+			words = Arrays.asList(rawSettings.get("WORDS").split(";"));
+		}
+	
+	//Main server part - listener. Launched after the initial setup.
+	private void start() throws IOException {
         serverSocket = new ServerSocket(port);
         //Listening for incoming requests.
         while (true) {
@@ -35,7 +65,7 @@ public class ProxyServer {
     }
 	
 	//Thread private class
-	private static class ProxyThread extends Thread {
+	private class ProxyThread extends Thread {
 		Socket browserSocket;
 		
 		public ProxyThread (Socket socket) {
@@ -48,7 +78,7 @@ public class ProxyServer {
 				BufferedReader browserIn = new BufferedReader(new InputStreamReader((browserSocket.getInputStream())));
 	            PrintWriter browserOut = new PrintWriter(browserSocket.getOutputStream());
 	            
-	            HTTPRequest currentRequest = new HTTPRequest(browserIn);
+	            HTTPRequest currentRequest = new HTTPRequest(browserIn, words);
 	            
 	            //Only supporting HTTP, not HTTPS
 	            if(currentRequest.method.equals("GET")) {

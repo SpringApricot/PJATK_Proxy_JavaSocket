@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class HTTPResponse {
 	ArrayList<String> unparsedRequest = new ArrayList<>();
@@ -16,8 +17,11 @@ public class HTTPResponse {
 	HashMap<String, String> headers = new HashMap<String,String>();
 	String body;
 	
+	List<String> words;
+	
 	//Reading in the response, parsing it, and reading body if content type is text.
-	public HTTPResponse (BufferedReader input) throws IOException {
+	public HTTPResponse (BufferedReader input, List<String> words) throws IOException {
+		this.words = words;
 		String line;
 		while (!(line = input.readLine()).equals("")) {
 			unparsedRequest.add(line);
@@ -29,6 +33,19 @@ public class HTTPResponse {
 			while (((line = input.readLine()) != null)) {
 				body = body.concat(line + "\r\n");
 			}
+		}
+		
+		if (headers.get("Content-Type").matches("text/html.*")) {
+			markSearchedWords();
+		}
+		
+		
+		System.out.println(body);
+	}
+	
+	private void markSearchedWords() {
+		for (String word : words) {
+			body = body.replaceAll(word, "<font color=\"red\">" + word + "</font>");
 		}
 	}
 	

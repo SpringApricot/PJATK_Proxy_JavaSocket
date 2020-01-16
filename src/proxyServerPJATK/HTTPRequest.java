@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class HTTPRequest {
 	ArrayList<String> unparsedRequest = new ArrayList<>();
@@ -18,7 +19,11 @@ public class HTTPRequest {
 	HashMap<String, String> headers = new HashMap<String,String>();
 	String body;
 	
-	public HTTPRequest (BufferedReader input) throws IOException {
+	List<String> words;
+	
+	public HTTPRequest (BufferedReader input, List<String> words) throws IOException {
+		this.words = words;
+		
 		String line;
 		
 		//Check for invalid input.
@@ -59,7 +64,7 @@ public class HTTPRequest {
         
         //Send data to targetOut here, create a response object to read in and store the target server's response.
         send(targetOut);
-        HTTPResponse response = new HTTPResponse(targetIn);
+        HTTPResponse response = new HTTPResponse(targetIn, words);
         
         targetOut.close();
 		targetIn.close();
