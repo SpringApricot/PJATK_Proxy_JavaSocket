@@ -1,3 +1,8 @@
+//A simple text-only HTTP proxy server.
+//Created for an assignment for the SKJ course at PJATK in Warsaw, Poland.
+//Author: Joanna Juszczak (s18344).
+//Created 2020.
+
 package proxyServerPJATK;
 
 import java.io.BufferedReader;
@@ -19,24 +24,26 @@ public class HTTPRequest {
 	HashMap<String, String> headers = new HashMap<String,String>();
 	String body;
 	
-	public HTTPRequest (BufferedReader input) throws IOException {
+	public HTTPRequest (BufferedReader input) throws IOException, InvalidRequestException {
 		
 		String line;
 		
 		//Check for invalid input.
 		if ((line = input.readLine()) == null) {
-			System.out.println("!!! BAD REQUEST !!!");
-			return;
+			throw new InvalidRequestException("Invalid request");
 		}
 		
+		//Reading in the top line and the headers.
 		while (!(line).equals("")) {
 			unparsedRequest.add(line);
 			line = input.readLine();
 		}
 		unparsedRequest.add("");
 		
+		//Parsing the request's data into the object.
 		parse();
 		
+		//Reading the body, if there is any.
 		if (headers.containsKey("Content-Length")) {
 			try {
 				int contentLength = Integer.parseInt(headers.get("Content-Length"));
@@ -50,11 +57,12 @@ public class HTTPRequest {
 			}
 		}
 		
+		//Overwriting two headers: to avoid gziped content and to facilitate reading the response's body.
 		headers.put("Accept-Encoding", "identity");
 		headers.put("Connection", "close");
 	}
 	
-	public HTTPResponse forward() throws UnknownHostException, IOException {
+	public HTTPResponse forward() throws IOException {
 		Socket targetSocket = new Socket(headers.get("Host"), 80);
 		BufferedReader targetIn = new BufferedReader(new InputStreamReader((targetSocket.getInputStream())));
         PrintWriter targetOut = new PrintWriter(targetSocket.getOutputStream());
@@ -88,7 +96,7 @@ public class HTTPRequest {
 	}
 	
 	//Sending the request to the target server via the provided writer.
-	public void send(PrintWriter writer) throws IOException {
+	public void send(PrintWriter writer) {
 		writer.println(method + " " + address + " " + version);
 		writer.flush();
 		

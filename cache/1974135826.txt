@@ -1,0 +1,19 @@
+HTTP/1.1 302 Found
+X-Cache: BYPASS
+Server: nginx
+Cache-Control: max-age=300
+Connection: close
+Expires: Thu, 16 Jan 2020 22:19:32 GMT
+Content-Length: 217
+Date: Thu, 16 Jan 2020 22:14:33 GMT
+Content-Type: text/html; charset=iso-8859-1
+Location: http://mobi.krakow.pl/favicon.ico
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="http://mobi.krakow.pl/favicon.ico">here</a>.</p>
+</body></html>
+

@@ -1,0 +1,99 @@
+HTTP/1.1 200 OK
+X-Cache: BYPASS
+Server: nginx
+Cache-Control: max-age=86400
+ETag: "pub1579212872"
+Connection: close
+Vary: Accept-Encoding
+Expires: Fri, 17 Jan 2020 22:14:32 GMT
+Last-Modified: Thu, 16 Jan 2020 22:14:32 GMT
+Content-Length: 10198
+Date: Thu, 16 Jan 2020 22:14:32 GMT
+Content-Type: text/css; charset=utf-8
+
+body{background:#fff}#main{color:#666}div#menu{background-image:url(/_img/menu_bg_b.gif)}a.but{background-image:url(/_img/button_bg.gif);color:#5E5E5E}#main
+a{color:#009ddb}#footer{background:#DEE3E7}#footer
+.name{color:#5E5E5E}#footer .link, #footer .link
+a{color:#5E5E5E}#mright
+a{color:#000}#article{color:#000}div.list_row{border-bottom:1px solid #CCC}#ikul div#search_form_small
+label.search_desc{color:#515050}.inst_widok{color:#666;border-bottom:1px solid #D5D5D5}div#weather
+div{color:#5E5E5E}div#weather_left{background-image:url(/_img/pog_l.gif)}div#weather_content{background-image:url(/_img/back.gif);display:block}body{font-family:'Arial CE',Arial,Helvetica,Verdana,sans-serif;margin:0px}.center{text-align:center}.font_bold{font-weight:bold}div#mobi_jdn_container{margin:5px
+0 10px;text-align:center}div#mobi_jdn_container
+img{max-width:480px;width:100%}div#mob_jdn_title{margin:5px
+0}div.mobi_more{text-align:right}.mobi_news_foto{float:left;padding:0px
+5px 5px 0px}.mobi_news_item{padding:5px
+0 5px 5px;margin-bottom:10px;display:block;border-bottom:1px solid #CCC}.mobi_news_item_title{background:#00a3e2;padding:3px;color:#fff;font-weight:bold;display:inline-block;margin-bottom:5px}.mobi_widget_container{padding:5px
+0px 5px 3px}.mobi_div_head
+a{font-size:15px !important}.mobi_div_head a:hover{color:white !important}.mobi_div_head{font-weight:bold;border-bottom:1px solid #369;padding:3px
+3px 8px}div#mobi_cracovia{margin-top:10px}div#page{max-width:480px;margin:auto;overflow:hidden;margin-top:10px;padding:3px;border:0px
+solid gray}div#mobi_top{background-repeat:repeat-x;overflow:hidden;text-align:center}.bold{font-weight:bold}.italic{font-style:italic}.float_left{float:left}.float_right{float:right}a{text-decoration:none;color:#666}a:visited{text-decoration:none;color:#666}a:hover{color:#666;text-decoration:underline}div#menu{background-image:none !important}.menu_item,.menu_item_active{display:block;padding:7px
+0 7px 4px;width:48%;font-size:16px !important;font-weight:bold;border-bottom:1px solid #ccc;color:#009ddb !important}.menu_item_active{color:black !important}.menu_item_active:hover{text-decoration:none !important}.menu_item:hover{background-color:#00A3E2;color:white !important}a
+img{border:none}img{border:none}#content{clear:both;padding-top:5px;overflow:hidden}#lmenu
+a{color:#009ddb;font-size:11px;font-size:14px}#main
+a{font-size:12px;text-decoration:none}#main a:hover{background-color:#00A3E2;color:white}#main a.span:hover{background-color:#00A3E2;color:white}#main
+a.mlink{display:block}#main a.mlink:hover{background:none;color:white}div#weather
+div{font-size:12px}div#weather_content{padding-top:4px;cursor:pointer;background-image:none}#main
+.next_img{padding-right:10px;padding-bottom:10px;float:right;overflow:hidden}#cent
+.right{overflow:hidden;padding-left:10px}#main{clear:both;font-size:13px}#footer{margin-top:20px;overflow:hidden}#mobi_stopka_navi{border-bottom:1px solid #BBB;border-top:1px solid #BBB;padding:5px
+!important;text-align:center}#footer
+.name{clear:both;padding-top:5px;font-weight:bold;font-size:11px;padding-left:10px}#footer
+.link{font-size:11px;padding-bottom:10px;padding-left:10px}#footer .link
+a{font-size:11px;text-decoration:none}#main_content{margin-left:10px;margin-right:10px}#article{margin-right:20px}#title{font-size:18px;font-weight:bold;margin-top:5px;margin-bottom:5px}#article_foto{float:left;margin-right:15px;margin-bottom:0px;color:#999;font-size:11px}#article_foto
+div{margin:0;padding:0}#article_text{font-size:11px;clear:right}div.article_text_short{padding-bottom:20px;font-weight:bold}#main
+div.signature{font-size:11px;color:#999;margin-top:20px}div.clear_both{clear:both}span.clear_both{clear:both;display:block}a.but{border:1px
+solid #bdbabd;font-weight:bold;font-size:12px;padding-bottom:2px;padding-top:2px;padding-left:15px;padding-right:15px;float:left;display:block;margin-right:10px;margin-left:10px}#weather_short{background:#FFC904;color:#5E5E5E !important;padding:10px
+5px;margin-bottom:10px}#weather_short_temp{color:#fff;font-size:30px;font-weight:bold;text-shadow:1px 1px 1px#888}#weather_short:hover{color:white !important}#weather,#weather_short{display:block}#weather_data_cnt{float:left;display:block}#weather .img_weather_img_mp,#weather_short
+.img_weather_img_mp{float:left;width:50px;margin:8px}div.list_row{clear:both;margin-bottom:10px;overflow:hidden;padding-bottom:5px;padding-top:5px}img.list_img{float:left;padding:1px;margin-right:20px}div.list_title_row{overflow:hidden;clear:both}div.list_title{padding-top:5px}a.list_title{padding-top:5px;font-weight:bold;color:#009ddb;font-size:15px !important}.picker2{background:url('//mpi.krakow.pl/_img/calendar/calendar.gif') no-repeat;border:0
+none;cursor:pointer;height:15px;vertical-align:top;width:15px;margin-top:6px;margin-left:10px}div.pagination{float:right;padding-bottom:0px;padding-top:5px}.pagination_selected{float:left;font-size:12px;font-weight:bold;padding-left:5px;padding-right:5px;padding-top:3px}.pagination_nr{color:#009ddb;float:left;font-size:10px;padding-left:1px;padding-right:1px;padding-top:3px}#mobi_jdn_desc{background-color:#00A3E2;color:white;padding:4px;font-weight:bold}#mobi_jdn_desc
+a{color:white}#MobiLeftMenuWidget{margin-bottom:10px}.lmenu_header_arrow{background:url("//mpi.krakow.pl/_img/mobi/arrow.png");background-position:0 0;background-repeat:no-repeat;width:13px;height:10px;float:right;margin:10px
+10px 0 0}.lmenu_pos_header{background:#EC1946;color:#fff;font-size:16px;font-weight:bold;height:31px;margin-bottom:3px;clear:both}.lmenu_link_container{border:0px
+solid red}.lmenu_link_container
+a{display:block;color:#009ddb !important;font-size:14px !important;width:48%;margin:3px
+0px;padding:5px
+0px 5px 0px;border-bottom:1px solid #ccc;margin-bottom:5px}.lmenu_link_container a:hover{background-color:#00A3E2;color:white !important;text-decoration:none !important}ul.mobi_list{margin-top:0;padding-left:20px}.mobi_bread_crumbs{margin-bottom:10px;display:block;font-weight:bold;border-bottom:1px solid #369;padding:3px
+3px 8px;font-size:15px !important}.mobi_bread_crumbs
+a{font-size:15px !important}.mobi_bread_crumbs a:hover{color:white !important}ul.mobi_list
+a{display:block;clear:both;padding:2px}.lmenu_header_title{padding:5px
+10px;float:left}.curtain{overflow:hidden}.clear_left{clear:left}.clear_right{clear:right}div.news_search{font-family:'Helvetica';overflow:hidden;padding:10px;background-color:#F6F6F6;border:1px
+solid #D5D5D5;color:#5E5E5E}.pagination_container{clear:both;height:30px}input.but,button.custom_button{border:1px
+solid #bdbabd;font-weight:bold;font-size:12px;padding-bottom:1px;padding-top:1px;padding-left:10px;padding-right:10px;background-image:url("//mpi.krakow.pl/_img/button_bg.gif");color:#5E5E5E}a.but:hover{color:#009ddb !important}button.custom_button{font-family:'Arial'}input{color:#515050;font-family:'Arial';font-size:13px;font-style:normal;font-weight:normal;text-align:left}#mobi_logo_container{text-decoration:none;display:block;clear:both;text-align:left}#logo_cracovia{display:block;width:100%;float:left;height:61px;background:url('//mpi.krakow.pl/_img/mobi/logo480_2.png') no-repeat scroll 0 0 transparent}.mobi_list_block_link{display:block}#mobi_contact_form form
+div{margin:10px
+5px 5px}#mobi_contact_form
+#cbody{width:200px}.ok{color:green;font-weight:bold}.error{color:red;font-weight:bold}#mobi_contact_form{margin:10px
+0}#mobi_kalen
+a.kal_list_title{font-size:12px;font-weight:bold;padding-top:5px}#mobi_kalen
+div.kal_list_data{font-size:11px;font-weight:bold;padding-top:5px}#mobi_kalen
+div.kal_list_desc{font-size:12px}#mobi_kalen div.head1,#mobi_ikul
+div.head1{font-size:18px;font-weight:bold;margin-bottom:5px;margin-top:5px;color:#000}#mobi_kalen
+div.imp_logo{float:left;padding-bottom:5px;padding-right:20px;padding-top:10px}#mobi_kalen div.dane_row,#mobi_ikul
+div.dane_row{clear:both;overflow:hidden;padding-left:5px;padding-top:5px}#mobi_kalen
+div.dane_desc{color:#000;float:left;font-weight:bold;padding-right:5px}#mobi_ikul
+div.dane_desc{color:#000;font-weight:bold}#mobi_kalen
+div.dane_value{overflow:hidden}#mobi_ikul
+div.dane_value{overflow:hidden;padding-left:10px}#mobi_kalen
+div.imp_desc{clear:both;padding-bottom:10px;padding-top:15px}#mobi_kalen
+div.dane_desc_br{color:#000;font-weight:bold}#mobi_kalen
+div.dane_value_br{padding-bottom:5px;padding-left:5px;padding-top:5px}#mobi_kalen
+div.navi_day{text-align:center;font-size:14px;font-weight:bold;padding-top:10px;padding-bottom:10px}#mobi_kalen
+a.navi_day_prev{padding-right:20px}#mobi_kalen
+a.navi_day_next{padding-left:20px}#mobi_kalen
+p{padding:0px;margin:0px}#mobi_search_form{clear:both;background-color:#F6F6F6;border:1px
+solid #D5D5D5;color:#5E5E5E;margin:10px
+0 5px;overflow:hidden;padding:10px;font-size:11px;font-weight:bolder}#mobi_search_form
+div.title{font-size:12px;font-weight:bold;margin:5px
+0 15px}#mobi_search_form
+input.text{width:75px}#mobi_search_form
+div.search_row{padding-bottom:10px}.li_head{margin-top:5px;font-weight:bold;list-style:none}.li_item{margin-left:30px}#mobi_ikul
+#lista{padding-top:10px}#mobi_ikul
+div.ik_list_data{font-size:11px;padding-left:10px}#google_map_container{margin:0px
+auto;display:block}#rest div.maps_nav,#hotel
+div.maps_nav{clear:both;height:30px;margin:0
+auto 10px;overflow:hidden;padding-bottom:5px;padding-top:5px;width:85px}#map_mag_ico,#map_red_ico{background:url("//mpi.krakow.pl/_img/mobi/navi.png");background-repeat:no-repeat;width:25px;display:block;height:30px;margin:0
+5px;float:left}#map_red_ico{background-position:0 0}#map_mag_ico{background-position:-25px 0}#mobi_ikul
+div.maps_nav{clear:both;overflow:hidden;padding-top:5px;padding-bottom:5px}div.list_row_odd{clear:both;overflow:hidden;padding-bottom:5px;padding-top:5px;padding-left:20px;border-top:1px solid #CCC}.mobi_list_container
+a{display:block;border-bottom:1px dotted #369;padding:10px}#portals_list_container
+a{display:block;border-bottom:1px dotted #369;padding:10px}span.link_bip{background-image:url("//mpi.krakow.pl/_img/ikony.png");background-position:-5px -735px;height:25px;padding:5px
+25px 5px 0;width:25px}.mapa_wortalu .first
+li{width:48% !important}.mapa_wortalu .under_first
+li{width:auto !important}
+

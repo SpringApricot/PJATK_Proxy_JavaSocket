@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+X-Cache: MISS
+Server: nginx
+Cache-Control: max-age=864000
+ETag: "pub1497342458"
+Connection: close
+Vary: Accept-Encoding
+Expires: Sun, 26 Jan 2020 22:14:13 GMT
+Last-Modified: Tue, 13 Jun 2017 08:27:38 GMT
+Content-Length: 2370
+Date: Thu, 16 Jan 2020 22:14:13 GMT
+Link: <http://www.krakow.pl//_m/f=_cssy/foundation_fix.css>; rel="canonical"
+Content-Type: text/css; charset=utf-8
+
+@media only
+screen{.row .smallbo-2{position:relative;width:16.66667%}.row .smallbo-3{position:relative;width:25%}.row .smallbo-4{position:relative;width:33.33333%}.row .smallbo-5{position:relative;width:41.66667%}.row .smallbo-6{position:relative;width:50%}.row .smallbo-7{position:relative;width:58.33333%}.row .smallbo-8{position:relative;width:66.66667%}.row .smallbo-9{position:relative;width:75%}.row .smallbo-10{position:relative;width:83.33333%}.row .smallbo-11{position:relative;width:91.66667%}.row .smallbo-12{position:relative;width:100%}}@media only screen and (min-width: 30em){.row .lo_mediumbo-2{position:relative;width:16.66667%}.row .lo_mediumbo-3{position:relative;width:25%}.row .lo_mediumbo-4{position:relative;width:33.33333%}.row .lo_mediumbo-5{position:relative;width:41.66667%}.row .lo_mediumbo-6{position:relative;width:50%}.row .lo_mediumbo-7{position:relative;width:58.33333%}.row .lo_mediumbo-8{position:relative;width:66.66667%}.row .lo_mediumbo-9{position:relative;width:75%}.row .lo_mediumbo-10{position:relative;width:83.33333%}.row .lo_mediumbo-11{position:relative;width:91.66667%}.row .lo_mediumbo-12{position:relative;width:100%}}@media only screen and (min-width: 48em){.row .mediumbo-2{position:relative;width:16.66667%}.row .mediumbo-3{position:relative;width:25%}.row .mediumbo-4{position:relative;width:33.33333%}.row .mediumbo-5{position:relative;width:41.66667%}.row .mediumbo-6{position:relative;width:50%}.row .mediumbo-7{position:relative;width:58.33333%}.row .mediumbo-8{position:relative;width:66.66667%}.row .mediumbo-9{position:relative;width:75%}.row .mediumbo-10{position:relative;width:83.33333%}.row .mediumbo-11{position:relative;width:91.66667%}.row .mediumbo-12{position:relative;width:100%}}@media only screen and (min-width: 64em){.row .largebo-1{position:relative;width:8.33333%}.row .largebo-2{position:relative;width:16.66667%}.row .largebo-3{position:relative;width:25%}.row .largebo-4{position:relative;width:33.33333%}.row .largebo-5{position:relative;width:41.66667%}.row .largebo-6{position:relative;width:50%}.row .largebo-7{position:relative;width:58.33333%}.row .largebo-8{position:relative;width:66.66667%}.row .largebo-9{position:relative;width:75%}.row .largebo-10{position:relative;width:83.33333%}.row .largebo-11{position:relative;width:91.66667%}.row .largebo-12{position:relative;width:100%}}
+
