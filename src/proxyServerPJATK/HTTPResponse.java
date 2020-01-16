@@ -10,51 +10,51 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HTTPResponse {
-	ArrayList<String> unparsedRequest = new ArrayList<>();
 	String version;
 	int statusCode;
 	String phrase;
 	HashMap<String, String> headers = new HashMap<String,String>();
 	String body;
 	
-	List<String> words;
-	
 	//Reading in the response, parsing it, and reading body if content type is text.
-	public HTTPResponse (BufferedReader input, List<String> words) throws IOException {
-		this.words = words;
+	public HTTPResponse (BufferedReader input) throws IOException {
+		//Reading in the response and headers.
+		ArrayList<String> unparsedRequest = new ArrayList<>();
+		
 		String line;
 		while (!(line = input.readLine()).equals("")) {
 			unparsedRequest.add(line);
 		}
-		unparsedRequest.add("");
-		parse();
+		
+		//Parsing the read data into the object.
+		parse(unparsedRequest);
+		
+		//Reading in the body if there is content of type text.
 		if(headers.containsKey("Content-Type") && headers.get("Content-Type").matches("text.*")) {
 			body = new String();
 			while (((line = input.readLine()) != null)) {
 				body = body.concat(line + "\r\n");
 			}
 		}
-		
-		if (headers.get("Content-Type").matches("text/html.*")) {
-			markSearchedWords();
-		}
-		
-		
-		System.out.println(body);
 	}
 	
-	private void markSearchedWords() {
+	//Marking the words from a given list in the response's body.
+	public void markSearchedWords(List<String> words) {
 		for (String word : words) {
 			body = body.replaceAll(word, "<font color=\"red\">" + word + "</font>");
 		}
 	}
 	
 	//Parsing the response and headers for ease of access.
-	public void parse() {
-		//Parsing the response's first line.
+	public void parse(ArrayList<String> unparsedRequest) {
+		//Splitting the response's first line.
 		String[] topLineSplit = unparsedRequest.get(0).split(" ");
+		
+		//Saving the data from the response's top line.
 		version = topLineSplit[0];
 		statusCode = Integer.parseInt(topLineSplit[1]);
+		
+		//Saving the phrase from the top line to the object - it may contain more than one word.
 		StringBuilder phraseBuilder = new StringBuilder(topLineSplit[2]);
 		for (int i = 3; i < topLineSplit.length ; i++) {
 			phraseBuilder.append(topLineSplit[i]);
@@ -62,25 +62,30 @@ public class HTTPResponse {
 		}
 		phrase = phraseBuilder.toString().trim();
 		
-		for (int i = 1; !((unparsedRequest.get(i)).equals("")); i++){
+		//Saving the headers to the object.
+		for (int i = 1; i < unparsedRequest.size(); i++){
 				String[] headerLineSplit = unparsedRequest.get(i).split(": ");
 				headers.put(headerLineSplit[0], headerLineSplit[1]);
 		}
 	}
 	
-	//Sending response to the browser via the provided writer.
+	//Sending response via the provided writer.
 	public void send(PrintWriter writer) throws IOException {
+		//Sending the top line.
 		writer.println(version + " " + statusCode + " " + phrase);
 		writer.flush();
 		
+		//Sending the headers.
 		headers.forEach((k, v) -> {
 			writer.println(k + ": " + v);
 			writer.flush();
 		});
 		
+		//Inserting an empty line after the headers.
 		writer.println();
 		writer.flush();
 		
+		//Sending the body, if there is one.
 		if (body != null) {
 			writer.println(body);
 			writer.flush();

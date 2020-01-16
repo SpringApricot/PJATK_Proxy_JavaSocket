@@ -1,3 +1,3 @@
 PROXY_PORT=5555
-WORDS=domain;krakow;squid;example;wersja
-CACHE_DIR="D:\TMP"
+WORDS=domain;Kraków;squid;example;wersja
+CACHE_DIR="cache"

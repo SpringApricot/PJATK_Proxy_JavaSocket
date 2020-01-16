@@ -19,10 +19,7 @@ public class HTTPRequest {
 	HashMap<String, String> headers = new HashMap<String,String>();
 	String body;
 	
-	List<String> words;
-	
-	public HTTPRequest (BufferedReader input, List<String> words) throws IOException {
-		this.words = words;
+	public HTTPRequest (BufferedReader input) throws IOException {
 		
 		String line;
 		
@@ -64,7 +61,7 @@ public class HTTPRequest {
         
         //Send data to targetOut here, create a response object to read in and store the target server's response.
         send(targetOut);
-        HTTPResponse response = new HTTPResponse(targetIn, words);
+        HTTPResponse response = new HTTPResponse(targetIn);
         
         targetOut.close();
 		targetIn.close();

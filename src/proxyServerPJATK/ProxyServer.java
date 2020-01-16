@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProxyServer {
 	ServerSocket serverSocket;
@@ -36,24 +37,24 @@ public class ProxyServer {
 	}
 	
 	//Read in the settings from the settings file.
-		private void readSettings(String path) throws IOException {
-			HashMap<String, String> rawSettings = new HashMap<String, String>();
-			File settingsFile = new File(path);
-			BufferedReader reader = new BufferedReader(new FileReader(settingsFile));
-			
-			//Reading settings from the file in a raw form.
-			String line;
-			String[] lineSplit;
-			while((line = reader.readLine()) != null) {
-				lineSplit = line.split("=");
-				rawSettings.put(lineSplit[0], lineSplit[1]);
-			}
-			
-			//Saving the raw settings to appropriate variables.
-			port = Integer.parseInt(rawSettings.get("PROXY_PORT"));
-			cachePath = rawSettings.get("CACHE_DIR");
-			words = Arrays.asList(rawSettings.get("WORDS").split(";"));
+	private void readSettings(String path) throws IOException {
+		HashMap<String, String> rawSettings = new HashMap<String, String>();
+		File settingsFile = new File(path);
+		BufferedReader reader = new BufferedReader(new FileReader(settingsFile));
+		
+		//Reading settings from the file in a raw form.
+		String line;
+		String[] lineSplit;
+		while((line = reader.readLine()) != null) {
+			lineSplit = line.split("=");
+			rawSettings.put(lineSplit[0], lineSplit[1]);
 		}
+		
+		//Saving the raw settings to appropriate variables.
+		port = Integer.parseInt(rawSettings.get("PROXY_PORT"));
+		cachePath = rawSettings.get("CACHE_DIR").replaceAll("\"", "");
+		words = Arrays.asList(rawSettings.get("WORDS").split(";"));
+	}
 	
 	//Main server part - listener. Launched after the initial setup.
 	private void start() throws IOException {
@@ -75,25 +76,70 @@ public class ProxyServer {
 		
 		public void run() {
 			try {
+				
 				BufferedReader browserIn = new BufferedReader(new InputStreamReader((browserSocket.getInputStream())));
 	            PrintWriter browserOut = new PrintWriter(browserSocket.getOutputStream());
 	            
-	            HTTPRequest currentRequest = new HTTPRequest(browserIn, words);
+	            //Receiving the request from the browser.
+	            HTTPRequest currentRequest = new HTTPRequest(browserIn);
 	            
 	            //Only supporting HTTP, not HTTPS
 	            if(currentRequest.method.equals("GET")) {
-	            	HTTPResponse response = currentRequest.forward();
-	            	response.send(browserOut);
+	            	
+	            	File cacheFile = findInCache(currentRequest.address);
+	            	
+	            	//If the file is not cached, send the request to the target server and save the response to a cache.
+	            	if(!cacheFile.exists()) {
+	            		//Sending the request to the target server.
+		            	HTTPResponse response = currentRequest.forward();
+		            	
+		            	//Only storing (and handling) the response if it contains a text file.
+		            	if (response.headers.get("Content-Type").matches("text.*")) {
+		            		cacheFile.createNewFile();
+		            		//Highlighting words from the provided list if the response is a html document.
+		            		if (response.headers.get("Content-Type").matches("text/html.*")) {
+								response.markSearchedWords(words);
+			            	}
+		            		
+		            		//Sending the response to the cache file.
+			            	PrintWriter fileWriter = new PrintWriter(cacheFile);
+			            	response.send(fileWriter);
+			            	fileWriter.close();
+		            	}
+	            	}
+	            	
+	            	//If the site was already cached, we just reads the file.
+	            	//If the site was not cached and the response content was text, it is now cached and can be read and sent to the browser.
+	            	//If it was not text, it is not cached and the request will be ignored.
+	            	if (cacheFile.exists()) {
+	            		//Read the response from cache and send it to the browser.
+	            		//The file exists in cache only if it's a text.
+	            		Scanner fileScanner = new Scanner(cacheFile);
+		            	String line;
+		            	while(fileScanner.hasNextLine()) {
+		            		line = fileScanner.nextLine();
+		            		browserOut.println(line);
+		            		browserOut.flush();
+		            	}
+	            	}
 	            }
 	            
+	            //Closing the communication with the browser.
 	            browserIn.close();
             	browserOut.close();
 				browserSocket.close();
+				
 			} catch (Exception e) {
 				//TODO
 				System.out.println(e);
 				e.printStackTrace();
 			}
+		}
+		
+		private File findInCache(String request) {
+			//Hashing the request for shorter unique file names.
+			int hash = request.hashCode();
+			return new File(cachePath + "\\" + hash + ".txt");
 		}
 	}
 }
