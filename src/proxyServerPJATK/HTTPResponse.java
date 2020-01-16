@@ -46,7 +46,7 @@ public class HTTPResponse {
 	//Marking the words from a given list in the response's body.
 	public void markSearchedWords(List<String> words) {
 		for (String word : words) {
-			body = body.replaceAll(word, "<font color=\"red\">" + word + "</font>");
+			body = body.replaceAll(word, "<mark><font color=\"red\">" + word + "</font></mark>");
 		}
 	}
 	
