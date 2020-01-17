@@ -7,14 +7,11 @@ package proxyServerPJATK;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class HTTPRequest {
 	ArrayList<String> unparsedRequest = new ArrayList<>();
@@ -90,7 +87,7 @@ public class HTTPRequest {
 		//Reading all the headers to the hashmap - until I meet the empty line that indicates end of headers, start of the body.
 		String unparsedLine;
 		for (int i = 1; !((unparsedLine = unparsedRequest.get(i)).equals("")); i++){
-			String[] headerLineSplit = unparsedRequest.get(i).split(": ");
+			String[] headerLineSplit = unparsedLine.split(": ");
 			headers.put(headerLineSplit[0], headerLineSplit[1]);
 		}
 	}

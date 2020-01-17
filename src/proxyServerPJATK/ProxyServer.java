@@ -57,6 +57,8 @@ public class ProxyServer {
 		port = Integer.parseInt(rawSettings.get("PROXY_PORT"));
 		cachePath = rawSettings.get("CACHE_DIR").replaceAll("\"", ""); //Removing the surrounding "" for use in File's constructor.
 		words = Arrays.asList(rawSettings.get("WORDS").split(";"));
+		
+		reader.close();
 	}
 	
 	//Main server part - listener. Launched after the initial setup.
@@ -92,9 +94,10 @@ public class ProxyServer {
 				System.out.println("Request received: " + currentRequest.method + " " + currentRequest.address);
 				
 				//Only supporting HTTP, not HTTPS
-				if(currentRequest.method.equals("GET")) {
+				if(!currentRequest.method.equals("CONNECT")) {
 					
 					File cacheFile = findInCache(currentRequest.address);
+					boolean wasCached = true; //This is changed to false if the request is not found in the cache. If this is true, the received html page's title is modified.
 					
 					//If the file is not cached, send the request to the target server and save the response to a cache.
 					if(!cacheFile.exists()) {
@@ -113,6 +116,8 @@ public class ProxyServer {
 							PrintWriter fileWriter = new PrintWriter(cacheFile);
 							response.send(fileWriter);
 							fileWriter.close();
+							
+							wasCached = false;
 						}
 					}
 					
@@ -126,9 +131,14 @@ public class ProxyServer {
 						String line;
 						while(fileScanner.hasNextLine()) {
 							line = fileScanner.nextLine();
+							if(wasCached && line.contains("<title>")) { //Checking if the request was not send to the target server and marking this in the title.
+								line = line.replaceFirst("<title>", "<title> !!CACHED!! - ");
+							}
 							browserOut.println(line);
 							browserOut.flush();
 						}
+						
+						fileScanner.close();
 					}
 				}
 				
